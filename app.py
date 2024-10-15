@@ -51,8 +51,21 @@ st.write(input_df)
 
 # 加载模型并进行预测
 model = load_model()
-prediction = model.predict(input_df)
 
-# 显示预测结果
-st.subheader('预测结果')
-st.write(prediction)
+# 使用模型进行预测
+if st.sidebar.button("预测"):
+    prediction = model.predict(input_df)[0]
+    st.write(f"**预测的去除率**: {prediction:.2f}%")
+    
+    # 根据预测值设置进度条
+    percentage = prediction / 100  # 将百分比转为小数
+    st.markdown(f"**去除率进度**:")
+    
+    # 渐变色进度条
+    progress_color = f"linear-gradient(90deg, #ff4b4b {percentage*100}%, #d3d3d3 {percentage*100}%)"
+    st.markdown(
+        f"""
+        <div style="width: 100%; height: 24px; background: {progress_color}; border-radius: 12px;"></div>
+        """,
+        unsafe_allow_html=True,
+    )
