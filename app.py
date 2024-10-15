@@ -12,9 +12,9 @@ st.title("Prediction of Fluoride Ion Removal Rate using Amorphous Magnesium Oxid
 
 # 添加使用说明
 st.markdown("""
-### 使用说明
-本应用用于预测无定形氧化镁空心球对氟离子的去除率。  
-请在左侧输入框中输入相关参数，然后点击“预测”按钮以获取去除率预测结果。
+### Instructions
+This application is used to predict the removal rate of fluoride ions using amorphous magnesium oxide hollow spheres.  
+Please enter the relevant parameters in the input box on the left, and then click the "Prediction" button to obtain the predicted removal rate results.
 """)
 
 # 调整左侧边距
