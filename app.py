@@ -14,30 +14,30 @@ st.title("无定形氧化镁空心球对氟离子的去除率预测")
 st.sidebar.header('输入参数')
 
 def user_input_features():
-    time = st.sidebar.number_input('Time (min)', min_value=0.0, max_value=10.0, value=0.0)
-    cmgo = st.sidebar.number_input('CMgO (g/L)',min_value=0.0, max_value=10.0, value=0.0)
-    cf = st.sidebar.number_input('CF (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
-    ph = st.sidebar.number_input('pH', min_value=0.0, max_value=14.0, step=0.1)
-    po4 = st.sidebar.number_input('PO43- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
-    so4 = st.sidebar.number_input('SO42- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
-    co3 = st.sidebar.number_input('CO32- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
-    hco3 = st.sidebar.number_input('HCO3- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
-    no3 = st.sidebar.number_input('NO3- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
-    cl = st.sidebar.number_input('Cl- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
-    br = st.sidebar.number_input('Br- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
+    ph = st.sidebar.number_input('pH')
+    time = st.sidebar.number_input('Time (min)')
+    c_mgo = st.sidebar.number_input('C_MgO (g/L)')
+    c_f = st.sidebar.number_input('C_F (mg/L)')
+    no3 = st.sidebar.number_input('NO3- (mg/L)')
+    br = st.sidebar.number_input('Br- (mg/L)')
+    cl = st.sidebar.number_input('Cl- (mg/L)')
+    so4 = st.sidebar.number_input('(SO4)2- (mg/L)')
+    hco3 = st.sidebar.number_input('HCO3- (mg/L)')
+    co3 = st.sidebar.number_input('(CO3)2- (mg/L)')
+    po4 = st.sidebar.number_input('(PO4)3- (mg/L)')
    
     data = {
-        'time': time,
-        'C_MgO': cmgo,
-        'C_F': cf,
         'pH': ph,
-        '(PO4)3-': po4,
-        '(SO4)2-': so4,
-        '(CO3)2-': co3,
-        'HCO3-': hco3,
+        'time': time,
+        'C_MgO': c_mgo,
+        'C_F': c_f,
         'NO3-': no3,
+        'Br-': br,
         'Cl-': cl,
-        'Br-': br
+        '(SO4)2-': so4,
+        'HCO3-': hco3,
+        '(CO3)2-': co3,
+        '(PO4)3-': po4
     }
     features = pd.DataFrame(data, index=[0])
     return features
