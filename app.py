@@ -25,13 +25,7 @@ def user_input_features():
     no3 = st.sidebar.number_input('NO3- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
     cl = st.sidebar.number_input('Cl- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
     br = st.sidebar.number_input('Br- (mg/L)', min_value=0.0, max_value=10.0, value=0.0)
-
-    CZn = st.sidebar.number_input('Time (min))', min_value=0.0, max_value=10.0, value=0.0)
-    Calkali = st.sidebar.number_input('Calkali (mol/l)', min_value=0.0, max_value=10.0, value=0.0)
-    Molar_ratio = st.sidebar.number_input('Molar_ratio (摩尔比)', min_value=0.0, max_value=10.0, value=0.0)
-    Temperature = st.sidebar.number_input('Temperature (K)', min_value=0, max_value=100, value=25)
-    Time = st.sidebar.number_input('Time (min)', min_value=0, max_value=800, value=10)
-    
+   
     data = {
         'time': time,
         'C_MgO': cmgo,
