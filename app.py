@@ -8,7 +8,7 @@ def load_model():
     return joblib.load('extra_trees_model.pkl')
 
 # 应用标题
-st.title("无定形氧化镁空心球对氟离子的去除率预测")
+st.title("Prediction of Fluoride Ion Removal Rate using Amorphous Magnesium Oxide Hollow Spheres")
 
 # 调整左侧边距
 st.markdown(
@@ -58,20 +58,20 @@ def user_input_features():
 df = user_input_features()
 
 # 显示输入参数
-st.subheader('输入的参数')
+st.subheader('Input Parameters')
 st.write(df)
 
 # 加载模型并进行预测
 model = load_model()
 
 # 使用模型进行预测
-if st.sidebar.button("预测"):
+if st.sidebar.button("Prediction"):
     prediction = model.predict(df)[0]
-    st.write(f"**预测的去除率**: {prediction:.2f}%")
+    st.write(f"**Predicted Removal Rate**: {prediction:.2f}%")
     
     # 根据预测值设置进度条
     percentage = prediction / 100  # 将百分比转为小数
-    st.markdown(f"**去除率进度**:")
+    st.markdown(f"**Removal Rate**:")
     
     # 渐变色进度条
     progress_color = f"linear-gradient(90deg, #ff4b4b {percentage*100}%, #d3d3d3 {percentage*100}%)"
