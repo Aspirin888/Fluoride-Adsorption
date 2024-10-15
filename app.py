@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 
 # 加载模型
-with open('weighted_average_predict.pkl', 'rb') as file:
+with open('catboost_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
 # 设置页面标题
