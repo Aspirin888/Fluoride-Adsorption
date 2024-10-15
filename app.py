@@ -15,7 +15,7 @@ st.markdown(
     """
     <style>
     .streamlit-container {
-        margin-left: 20px; /* 调整左侧边距 */
+        margin-left: 10px; /* 调整左侧边距 */
     }
     </style>
     """,
