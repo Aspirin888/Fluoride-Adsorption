@@ -45,8 +45,8 @@ def user_input_features():
 input_df = user_input_features()
 
 # 显示输入的参数
-st.subheader('输入的参数')
-st.write(input_df)
+#st.subheader('输入的参数')
+#st.write(input_df)
 
 # 加载模型并进行预测
 model = load_model()
