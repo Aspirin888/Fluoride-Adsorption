@@ -1,60 +1,51 @@
 import streamlit as st
-import pandas as pd
-from catboost import CatBoostRegressor
+import pickle
+import numpy as np
 
-# 初始化并训练 CatBoost 模型
-catboost_model = CatBoostRegressor(
-    verbose=0,
-    bagging_temperature=0.49515144330039407,
-    depth=8,
-    l2_leaf_reg=2.193560575993452,
-    learning_rate=0.15327752053056587,
-    subsample=0.841204717774464,
-    iterations=1000,
-    random_seed=42
-)
+# 加载模型
+with open('weighted_average_predict.pkl', 'rb') as file:
+    model = pickle.load(file)
 
-# 假设你已经用 dropset 数据集训练了模型
-# 这里可以添加代码读取数据集并训练模型
-# df = pd.read_csv('dropset.csv')
-# X = df.drop('Removal_rate', axis=1)
-# y = df['Removal_rate']
-# catboost_model.fit(X, y)
+# 设置页面标题
+st.title("无定形氧化镁空心球对氟离子的去除率预测")
 
-# Streamlit 用户界面
-st.title("Removal Rate Prediction App")
-st.write("使用 CatBoost 模型预测 Removal Rate")
+# 左侧输入栏
+st.sidebar.header("输入参数")
 
-# 用户输入特征
-pH = st.number_input("pH", min_value=0.0, max_value=14.0, value=7.0)
-time = st.number_input("Time (h)", min_value=0.0, value=1.0)
-C_MgO = st.number_input("C_MgO (mg/L)", min_value=0.0, value=0.0)
-C_F = st.number_input("C_F (mg/L)", min_value=0.0, value=0.0)
-NO3_ = st.number_input("NO3- (mg/L)", min_value=0.0, value=0.0)
-Br_ = st.number_input("Br- (mg/L)", min_value=0.0, value=0.0)
-Cl_ = st.number_input("Cl- (mg/L)", min_value=0.0, value=0.0)
-SO4_2 = st.number_input("SO4 (mg/L)", min_value=0.0, value=0.0)
-HCO3_ = st.number_input("HCO3- (mg/L)", min_value=0.0, value=0.0)
-CO3_2 = st.number_input("CO3 (mg/L)", min_value=0.0, value=0.0)
-PO4_3 = st.number_input("PO4 (mg/L)", min_value=0.0, value=0.0)
+# 获取用户输入
+time = st.sidebar.number_input("Time (min)", min_value=0, max_value=500, value=60, step=1)
+CMgO = st.sidebar.number_input("CMgO (g/L)", min_value=0.0, max_value=100.0, value=5.0, step=0.1)
+CF = st.sidebar.number_input("CF (mg/L)", min_value=0.0, max_value=100.0, value=10.0, step=0.1)
+pH = st.sidebar.number_input("pH", min_value=0.0, max_value=14.0, value=7.0, step=0.1)
+PO4 = st.sidebar.number_input("PO43- (mg/L)", min_value=0.0, max_value=100.0, value=2.0, step=0.1)
+SO4 = st.sidebar.number_input("SO42- (mg/L)", min_value=0.0, max_value=100.0, value=2.0, step=0.1)
+CO3 = st.sidebar.number_input("CO32- (mg/L)", min_value=0.0, max_value=100.0, value=2.0, step=0.1)
+HCO3 = st.sidebar.number_input("HCO3- (mg/L)", min_value=0.0, max_value=100.0, value=2.0, step=0.1)
+NO3 = st.sidebar.number_input("NO3- (mg/L)", min_value=0.0, max_value=100.0, value=2.0, step=0.1)
+Cl = st.sidebar.number_input("Cl- (mg/L)", min_value=0.0, max_value=100.0, value=2.0, step=0.1)
+Br = st.sidebar.number_input("Br- (mg/L)", min_value=0.0, max_value=100.0, value=2.0, step=0.1)
 
-# 按钮触发预测
-if st.button("预测 Removal Rate"):
-    # 将输入特征组织成 DataFrame
-    input_data = pd.DataFrame({
-        'pH': [pH],
-        'time': [time],
-        'C_MgO': [C_MgO],
-        'C_F': [C_F],
-        'NO3-': [NO3_],
-        'Br-': [Br_],
-        'Cl-': [Cl_],
-        '(SO4)2-': [SO4_2],
-        'HCO3-': [HCO3_],
-        '(CO3)2-': [CO3_2],
-        '(PO4)3-': [PO4_3],
-    })
+# 将输入数据转换为数组
+input_data = np.array([[time, CMgO, CF, pH, PO4, SO4, CO3, HCO3, NO3, Cl, Br]])
 
-    # 进行预测
-    prediction = catboost_model.predict(input_data)
-    st.success(f"预测的 Removal Rate: {prediction[0]:.2f}")
+# 使用模型进行预测
+if st.sidebar.button("预测"):
+    prediction = model.predict(input_data)[0]
+    
+    # 显示预测的去除率
+    st.write(f"**预测的去除率**: {prediction:.2f}%")
+    
+    # 计算进度条的进度（假设百分比最大为100）
+    progress_value = int(prediction)
+    
+    # 显示进度条
+    progress = st.progress(progress_value)
+    
+    # 渐变进度条颜色（通过插入自定义CSS）
+    st.markdown(f"""
+    <style>
+    .stProgress > div > div > div > div {{
+        background: linear-gradient(to right, #ff0000, #00ff00);
+    }}
+    </style>
+    """, unsafe_allow_html=True)
