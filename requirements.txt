@@ -2,3 +2,4 @@ streamlit     # 用于构建 Streamlit 应用
 numpy     # 用于数组和数值计算
 scikit-learn    # 用于模型加载和预测
 catboost     # 如果训练时使用了 CatBoost 模型
+joblib
