@@ -14,17 +14,17 @@ st.title("无定形氧化镁空心球对氟离子的去除率预测")
 st.sidebar.header('输入参数')
 
 def user_input_features():
-    ph = st.sidebar.number_input('pH')
-    time = st.sidebar.number_input('Time (min)')
-    c_mgo = st.sidebar.number_input('C_MgO (g/L)')
-    c_f = st.sidebar.number_input('C_F (mg/L)')
-    no3 = st.sidebar.number_input('NO3- (mg/L)')
-    br = st.sidebar.number_input('Br- (mg/L)')
-    cl = st.sidebar.number_input('Cl- (mg/L)')
-    so4 = st.sidebar.number_input('(SO4)2- (mg/L)')
-    hco3 = st.sidebar.number_input('HCO3- (mg/L)')
-    co3 = st.sidebar.number_input('(CO3)2- (mg/L)')
-    po4 = st.sidebar.number_input('(PO4)3- (mg/L)')
+    ph = st.sidebar.number_input('pH', min_value=2.0, max_value=13.0, value=2.0)
+    time = st.sidebar.number_input('Time (min)', min_value=0.0, max_value=500.0, value=1.0)
+    c_mgo = st.sidebar.number_input('C_MgO (g/L)', min_value=0.0, max_value=2.0, value=0.1)
+    c_f = st.sidebar.number_input('C_F (mg/L)', min_value=0.0, max_value=100.0, value=10.0)
+    no3 = st.sidebar.number_input('NO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    br = st.sidebar.number_input('Br- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    cl = st.sidebar.number_input('Cl- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    so4 = st.sidebar.number_input('(SO4)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    hco3 = st.sidebar.number_input('HCO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    co3 = st.sidebar.number_input('(CO3)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    po4 = st.sidebar.number_input('(PO4)3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
    
     data = {
         'pH': ph,
