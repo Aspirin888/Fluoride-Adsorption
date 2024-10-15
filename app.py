@@ -14,6 +14,8 @@ st.title("无定形氧化镁空心球对氟离子的去除率预测")
 st.sidebar.header('输入参数')
 
 def user_input_features():
+
+    
     ph = st.sidebar.number_input('pH', min_value=2.0, max_value=13.0, value=2.0)
     time = st.sidebar.number_input('Time (min)', min_value=0.0, max_value=500.0, value=1.0)
     c_mgo = st.sidebar.number_input('C_MgO (g/L)', min_value=0.0, max_value=2.0, value=0.1)
@@ -45,8 +47,8 @@ def user_input_features():
 input_df = user_input_features()
 
 # 显示输入的参数
-#st.subheader('输入的参数')
-#st.write(input_df)
+st.subheader('输入的参数')
+st.write(input_df)
 
 # 加载模型并进行预测
 model = load_model()
