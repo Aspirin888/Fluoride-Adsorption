@@ -5,7 +5,7 @@ import joblib
 # 加载模型
 @st.cache(allow_output_mutation=True)
 def load_model():
-    return joblib.load('gbr_model.pkl')
+    return joblib.load('extra_trees_model.pkl')
 
 # 应用标题
 st.title("无定形氧化镁空心球对氟离子的去除率预测")
