@@ -10,12 +10,22 @@ def load_model():
 # 应用标题
 st.title("无定形氧化镁空心球对氟离子的去除率预测")
 
+# 调整左侧边距
+st.markdown(
+    """
+    <style>
+    .streamlit-container {
+        margin-left: 20px; /* 调整左侧边距 */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # 输入参数
 st.sidebar.header('输入参数')
 
 def user_input_features():
-
-    
     ph = st.sidebar.number_input('pH', min_value=2.0, max_value=13.0, value=2.0)
     time = st.sidebar.number_input('Time (min)', min_value=0.0, max_value=500.0, value=1.0)
     c_mgo = st.sidebar.number_input('C_MgO (g/L)', min_value=0.0, max_value=2.0, value=0.1)
@@ -27,6 +37,7 @@ def user_input_features():
     hco3 = st.sidebar.number_input('HCO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
     co3 = st.sidebar.number_input('(CO3)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
     po4 = st.sidebar.number_input('(PO4)3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+   
     data = {
         'pH': ph,
         'time': time,
@@ -70,3 +81,4 @@ if st.sidebar.button("预测"):
         """,
         unsafe_allow_html=True,
     )
+
