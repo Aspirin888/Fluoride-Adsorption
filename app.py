@@ -66,7 +66,7 @@ model = load_model()
 
 # 使用模型进行预测
 if st.sidebar.button("预测"):
-    prediction = model.predict(input_df)[0]
+    prediction = model.predict(df)[0]
     st.write(f"**预测的去除率**: {prediction:.2f}%")
     
     # 根据预测值设置进度条
