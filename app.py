@@ -34,8 +34,8 @@ def user_input_features():
     
     data = {
         'Time': time,
-        'CMgO': cmgo,
-        'CF': cf,
+        'C_MgO': cmgo,
+        'C_F': cf,
         'pH': ph,
         'PO4': po4,
         'SO4': so4,
