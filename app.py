@@ -30,7 +30,7 @@ st.markdown(
 )
 
 # 输入参数
-st.sidebar.header('输入参数')
+st.sidebar.header('Input Parameters')
 
 def user_input_features():
     ph = st.sidebar.number_input('pH', min_value=2.0, max_value=13.0, value=2.0)
