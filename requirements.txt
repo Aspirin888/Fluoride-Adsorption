@@ -1,4 +1,4 @@
-streamlit==1.25.0      # 用于构建 Streamlit 应用
-numpy==1.24.2          # 用于数组和数值计算
-scikit-learn==1.2.2    # 用于模型加载和预测
-catboost==1.1.0        # 如果训练时使用了 CatBoost 模型
+streamlit     # 用于构建 Streamlit 应用
+numpy     # 用于数组和数值计算
+scikit-learn    # 用于模型加载和预测
+catboost     # 如果训练时使用了 CatBoost 模型
