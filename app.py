@@ -10,6 +10,13 @@ def load_model():
 # 应用标题
 st.title("Prediction of Fluoride Ion Removal Rate using Amorphous Magnesium Oxide Hollow Spheres")
 
+# 添加使用说明
+st.markdown("""
+### 使用说明
+本应用用于预测无定形氧化镁空心球对氟离子的去除率。  
+请在左侧输入框中输入相关参数，然后点击“预测”按钮以获取去除率预测结果。
+""")
+
 # 调整左侧边距
 st.markdown(
     """
@@ -37,7 +44,7 @@ def user_input_features():
     hco3 = st.sidebar.number_input('HCO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
     co3 = st.sidebar.number_input('(CO3)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
     po4 = st.sidebar.number_input('(PO4)3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-   
+
     data = {
         'pH': ph,
         'time': time,
@@ -59,7 +66,22 @@ df = user_input_features()
 
 # 显示输入参数
 st.subheader('Input Parameters')
-st.write(df)
+
+# 使用列来显示输入参数
+col1, col2 = st.columns(2)
+with col1:
+    st.write("**pH:**", df['pH'].values[0])
+    st.write("**Time (min):**", df['time'].values[0])
+    st.write("**C_MgO (g/L):**", df['C_MgO'].values[0])
+    st.write("**C_F (mg/L):**", df['C_F'].values[0])
+    st.write("**NO3- (mg/L):**", df['NO3-'].values[0])
+with col2:
+    st.write("**Br- (mg/L):**", df['Br-'].values[0])
+    st.write("**Cl- (mg/L):**", df['Cl-'].values[0])
+    st.write("**(SO4)2- (mg/L):**", df['(SO4)2-'].values[0])
+    st.write("**HCO3- (mg/L):**", df['HCO3-'].values[0])
+    st.write("**(CO3)2- (mg/L):**", df['(CO3)2-'].values[0])
+    st.write("**(PO4)3- (mg/L):**", df['(PO4)3-'].values[0])
 
 # 加载模型并进行预测
 model = load_model()
@@ -81,4 +103,3 @@ if st.sidebar.button("Prediction"):
         """,
         unsafe_allow_html=True,
     )
-
