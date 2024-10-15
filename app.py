@@ -33,17 +33,17 @@ def user_input_features():
     Time = st.sidebar.number_input('Time (min)', min_value=0, max_value=800, value=10)
     
     data = {
-        'Time': time,
+        'time': time,
         'C_MgO': cmgo,
         'C_F': cf,
         'pH': ph,
-        'PO4': po4,
-        'SO4': so4,
-        'CO3': co3,
-        'HCO3': hco3,
-        'NO3': no3,
-        'Cl': cl,
-        'Br': br
+        '(PO4)3-': po4,
+        '(SO4)2-': so4,
+        '(CO3)2-': co3,
+        'HCO3-': hco3,
+        'NO3-': no3,
+        'Cl-': cl,
+        'Br-': br
     }
     features = pd.DataFrame(data, index=[0])
     return features
