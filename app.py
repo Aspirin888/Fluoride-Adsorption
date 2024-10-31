@@ -5,7 +5,7 @@ import joblib
 # Load model
 @st.cache(allow_output_mutation=True)
 def load_model():
-    return joblib.load('extra_trees_model.pkl')
+    return joblib.load('ET_model.pkl')
 
 # Application title
 st.title("Prediction of Fluoride Ion Removal Rate using Magnesium Oxide ")
