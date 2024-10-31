@@ -8,7 +8,7 @@ def load_model():
     return joblib.load('extra_trees_model.pkl')
 
 # Application title
-st.title("Prediction of Fluoride Ion Removal Rate using Amorphous Magnesium Oxide Hollow Spheres")
+st.title("Prediction of Fluoride Ion Removal Rate using Magnesium Oxide ")
 
 # Instructions
 st.markdown("""
