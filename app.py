@@ -59,11 +59,11 @@ def user_input_features():
 
     data = {
         'BET': bet,
-        'Daverage': daverage,
-        'Pore Volume': pore_volume,
+        'D_average': daverage,
+        'Pore_volume': pore_volume,
         'Qm': qm,
         'pH': ph,
-        'time': time,  # Ensure the key matches the model's expected input
+        'Time': time,  # Ensure the key matches the model's expected input
         'C_MgO': c_mgo,
         'C_F': c_f,
         'NO3-': no3,
