@@ -8,12 +8,12 @@ def load_model():
     return joblib.load('extra_trees_model.pkl')
 
 # Application title
-st.title("Prediction of Fluoride Ion Removal Rate using Magnesium Oxide ")
+st.title("Prediction of Fluoride Ion Removal Rate using Amorphous Magnesium Oxide Hollow Spheres")
 
 # Instructions
 st.markdown("""
 ### Instructions
-This application predicts the removal rate of fluoride ions using magnesium oxide.  
+This application predicts the removal rate of fluoride ions using amorphous magnesium oxide hollow spheres.  
 Please enter the relevant parameters in the input box on the left, then click the "Prediction" button to obtain the predicted results.
 """)
 
@@ -63,7 +63,7 @@ def user_input_features():
         'Pore Volume': pore_volume,
         'Qm': qm,
         'pH': ph,
-        'Time': time,
+        'time': time,  # Ensure the key matches the model's expected input
         'C_MgO': c_mgo,
         'C_F': c_f,
         'NO3-': no3,
@@ -91,7 +91,7 @@ with col1:
     st.write("**Pore Volume (cm3/g):**", df['Pore Volume'].values[0])
     st.write("**Qm (mg/g):**", df['Qm'].values[0])
     st.write("**pH:**", df['pH'].values[0])
-    st.write("**Time (min):**", df['Time'].values[0])
+    st.write("**Time (min):**", df['time'].values[0])  # Ensure consistent key usage
     st.write("**C_MgO (g/L):**", df['C_MgO'].values[0])
     st.write("**C_F (mg/L):**", df['C_F'].values[0])
 with col2:
