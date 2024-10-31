@@ -52,27 +52,27 @@ def user_input_features():
 
     with col1:
         st.subheader('Magnesium Oxide Parameters')
-        bet = st.number_input('BET (m2/g)', min_value=0.0, max_value=300.0, value=50.0)
-        d_average = st.number_input('D_average (nm)', min_value=0.0, max_value=500.0, value=50.0)
-        pore_volume = st.number_input('Pore_volume (cm3/g)', min_value=0.0, max_value=5.0, value=1.0)
-        qm = st.number_input('Qm (mg/g)', min_value=0.0, max_value=1000.0, value=100.0)
+        bet = st.sidebar.number_input('BET (m2/g)', min_value=0.0, max_value=300.0, value=50.0)
+        d_average = st.sidebar.number_input('D_average (nm)', min_value=0.0, max_value=500.0, value=50.0)
+        pore_volume = st.sidebar.number_input('Pore_volume (cm3/g)', min_value=0.0, max_value=5.0, value=1.0)
+        qm = st.sidebar.number_input('Qm (mg/g)', min_value=0.0, max_value=1000.0, value=100.0)
 
     with col2:
         st.subheader('Reaction Conditions')
-        ph = st.number_input('pH', min_value=2.0, max_value=13.0, value=7.0)
-        time = st.number_input('Time (min)', min_value=0.0, max_value=500.0, value=10.0)
-        c_mgo = st.number_input('C_MgO (g/L)', min_value=0.0, max_value=2.0, value=0.1)
-        c_f = st.number_input('C_F (mg/L)', min_value=0.0, max_value=100.0, value=10.0)
+        ph = st.sidebar.number_input('pH', min_value=2.0, max_value=13.0, value=7.0)
+        time = st.sidebar.number_input('Time (min)', min_value=0.0, max_value=500.0, value=10.0)
+        c_mgo = st.sidebar.number_input('C_MgO (g/L)', min_value=0.0, max_value=2.0, value=0.1)
+        c_f = st.sidebar.number_input('C_F (mg/L)', min_value=0.0, max_value=100.0, value=10.0)
 
     with col3:
         st.subheader('Coexisting Ions')
-        no3 = st.number_input('NO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        br = st.number_input('Br- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        cl = st.number_input('Cl- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        so4 = st.number_input('(SO4)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        hco3 = st.number_input('HCO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        co3 = st.number_input('(CO3)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        po4 = st.number_input('(PO4)3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+        no3 = st.sidebar.number_input('NO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+        br = st.sidebar.number_input('Br- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+        cl = st.sidebar.number_input('Cl- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+        so4 = st.sidebar.number_input('(SO4)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+        hco3 = st.sidebar.number_input('HCO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+        co3 = st.sidebar.number_input('(CO3)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+        po4 = st.sidebar.number_input('(PO4)3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
 
     data = {
         'BET': bet,
@@ -97,7 +97,7 @@ def user_input_features():
 # Get input data
 df = user_input_features()
 
-# Display input parameters
+# Display input parameters summary in three sections
 st.subheader('Input Parameters Summary')
 
 # Display input parameters in three sections
