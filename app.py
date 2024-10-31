@@ -8,12 +8,12 @@ def load_model():
     return joblib.load('extra_trees_model.pkl')
 
 # Application title
-st.title("Prediction of Fluoride Ion Removal Rate using Amorphous Magnesium Oxide Hollow Spheres")
+st.title("Prediction of Fluoride Ion Removal Rate using Magnesium Oxide ")
 
 # Instructions
 st.markdown("""
 ### Instructions
-This application predicts the removal rate of fluoride ions using amorphous magnesium oxide hollow spheres.  
+This application predicts the removal rate of fluoride ions using magnesium oxide.  
 Please enter the relevant parameters in the input box on the left, then click the "Prediction" button to obtain the predicted results.
 """)
 
