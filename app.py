@@ -2,13 +2,13 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load model
-@st.cache(allow_output_mutation=True)
+# Load model using the new caching mechanism
+@st.cache_resource
 def load_model():
     return joblib.load('ET_model.pkl')
 
 # Application title
-st.title("Prediction of Fluoride Ion Removal Rate using Magnesium Oxide ")
+st.title("Prediction of Fluoride Ion Removal Rate using Magnesium Oxide")
 
 # Instructions
 st.markdown("""
@@ -36,8 +36,8 @@ def user_input_features():
     # Magnesium Oxide Parameters
     st.sidebar.subheader('Magnesium Oxide Parameters')
     bet = st.sidebar.number_input('BET (m2/g)', min_value=0.0, max_value=300.0, value=50.0)
-    daverage = st.sidebar.number_input('Daverage (nm)', min_value=0.0, max_value=500.0, value=50.0)
-    pore_volume = st.sidebar.number_input('Pore Volume (cm3/g)', min_value=0.0, max_value=5.0, value=1.0)
+    d_average = st.sidebar.number_input('D_average (nm)', min_value=0.0, max_value=500.0, value=50.0)
+    pore_volume = st.sidebar.number_input('Pore_volume (cm3/g)', min_value=0.0, max_value=5.0, value=1.0)
     qm = st.sidebar.number_input('Qm (mg/g)', min_value=0.0, max_value=1000.0, value=100.0)
 
     # Reaction Conditions
@@ -59,11 +59,11 @@ def user_input_features():
 
     data = {
         'BET': bet,
-        'D_average': daverage,
+        'D_average': d_average,
         'Pore_volume': pore_volume,
         'Qm': qm,
         'pH': ph,
-        'Time': time,  # Ensure the key matches the model's expected input
+        'Time': time,
         'C_MgO': c_mgo,
         'C_F': c_f,
         'NO3-': no3,
@@ -87,11 +87,11 @@ st.subheader('Input Parameters')
 col1, col2 = st.columns(2)
 with col1:
     st.write("**BET (m2/g):**", df['BET'].values[0])
-    st.write("**Daverage (nm):**", df['Daverage'].values[0])
-    st.write("**Pore Volume (cm3/g):**", df['Pore Volume'].values[0])
+    st.write("**D_average (nm):**", df['D_average'].values[0])
+    st.write("**Pore Volume (cm3/g):**", df['Pore_volume'].values[0])
     st.write("**Qm (mg/g):**", df['Qm'].values[0])
     st.write("**pH:**", df['pH'].values[0])
-    st.write("**Time (min):**", df['time'].values[0])  # Ensure consistent key usage
+    st.write("**Time (min):**", df['Time'].values[0])
     st.write("**C_MgO (g/L):**", df['C_MgO'].values[0])
     st.write("**C_F (mg/L):**", df['C_F'].values[0])
 with col2:
