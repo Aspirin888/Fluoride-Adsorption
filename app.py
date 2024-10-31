@@ -14,7 +14,7 @@ st.title("Prediction of Fluoride Ion Removal Rate using Magnesium Oxide")
 st.markdown("""
 ### Instructions
 This application predicts the removal rate of fluoride ions using amorphous magnesium oxide hollow spheres.  
-Please enter the relevant parameters in the input boxes below, then click the "Prediction" button to obtain the predicted results.
+Please enter the relevant parameters in the input box on the left, then click the "Prediction" button to obtain the predicted results.
 """)
 
 # Sidebar styling
@@ -23,20 +23,6 @@ st.markdown(
     <style>
     .streamlit-container {
         margin-left: 10px; /* Adjust left margin */
-    }
-    .parameter-column {
-        padding: 10px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-    }
-    .magnesium-oxide {
-        background-color: #f0f8ff; /* Light blue */
-    }
-    .reaction-conditions {
-        background-color: #e6ffe6; /* Light green */
-    }
-    .coexisting-ions {
-        background-color: #fff3e6; /* Light orange */
     }
     </style>
     """,
@@ -47,32 +33,29 @@ st.markdown(
 st.sidebar.header('Input Parameters')
 
 def user_input_features():
-    # Create columns for different categories
-    col1, col2, col3 = st.columns(3)
+    # Magnesium Oxide Parameters
+    st.sidebar.subheader('Magnesium Oxide Parameters')
+    bet = st.sidebar.number_input('BET (m2/g)', min_value=0.0, max_value=300.0, value=50.0)
+    d_average = st.sidebar.number_input('D_average (nm)', min_value=0.0, max_value=500.0, value=50.0)
+    pore_volume = st.sidebar.number_input('Pore_volume (cm3/g)', min_value=0.0, max_value=5.0, value=1.0)
+    qm = st.sidebar.number_input('Qm (mg/g)', min_value=0.0, max_value=1000.0, value=100.0)
 
-    with col1:
-        st.subheader('Magnesium Oxide Parameters')
-        bet = st.sidebar.number_input('BET (m2/g)', min_value=0.0, max_value=300.0, value=50.0)
-        d_average = st.sidebar.number_input('D_average (nm)', min_value=0.0, max_value=500.0, value=50.0)
-        pore_volume = st.sidebar.number_input('Pore_volume (cm3/g)', min_value=0.0, max_value=5.0, value=1.0)
-        qm = st.sidebar.number_input('Qm (mg/g)', min_value=0.0, max_value=1000.0, value=100.0)
+    # Reaction Conditions
+    st.sidebar.subheader('Reaction Conditions')
+    ph = st.sidebar.number_input('pH', min_value=2.0, max_value=13.0, value=7.0)
+    time = st.sidebar.number_input('Time (min)', min_value=0.0, max_value=500.0, value=10.0)
+    c_mgo = st.sidebar.number_input('C_MgO (g/L)', min_value=0.0, max_value=2.0, value=0.1)
+    c_f = st.sidebar.number_input('C_F (mg/L)', min_value=0.0, max_value=100.0, value=10.0)
 
-    with col2:
-        st.subheader('Reaction Conditions')
-        ph = st.sidebar.number_input('pH', min_value=2.0, max_value=13.0, value=7.0)
-        time = st.sidebar.number_input('Time (min)', min_value=0.0, max_value=500.0, value=10.0)
-        c_mgo = st.sidebar.number_input('C_MgO (g/L)', min_value=0.0, max_value=2.0, value=0.1)
-        c_f = st.sidebar.number_input('C_F (mg/L)', min_value=0.0, max_value=100.0, value=10.0)
-
-    with col3:
-        st.subheader('Coexisting Ions')
-        no3 = st.sidebar.number_input('NO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        br = st.sidebar.number_input('Br- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        cl = st.sidebar.number_input('Cl- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        so4 = st.sidebar.number_input('(SO4)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        hco3 = st.sidebar.number_input('HCO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        co3 = st.sidebar.number_input('(CO3)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
-        po4 = st.sidebar.number_input('(PO4)3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    # Coexisting Ions
+    st.sidebar.subheader('Coexisting Ions')
+    no3 = st.sidebar.number_input('NO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    br = st.sidebar.number_input('Br- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    cl = st.sidebar.number_input('Cl- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    so4 = st.sidebar.number_input('(SO4)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    hco3 = st.sidebar.number_input('HCO3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    co3 = st.sidebar.number_input('(CO3)2- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
+    po4 = st.sidebar.number_input('(PO4)3- (mg/L)', min_value=0.0, max_value=900.0, value=0.0)
 
     data = {
         'BET': bet,
@@ -97,33 +80,28 @@ def user_input_features():
 # Get input data
 df = user_input_features()
 
-# Display input parameters summary in three sections
-st.subheader('Input Parameters Summary')
+# Display input parameters
+st.subheader('Input Parameters')
 
-# Display input parameters in three sections
-st.markdown('<div class="parameter-column magnesium-oxide">', unsafe_allow_html=True)
-st.write("**BET (m2/g):**", df['BET'].values[0])
-st.write("**D_average (nm):**", df['D_average'].values[0])
-st.write("**Pore Volume (cm3/g):**", df['Pore_volume'].values[0])
-st.write("**Qm (mg/g):**", df['Qm'].values[0])
-st.markdown('</div>', unsafe_allow_html=True)
-
-st.markdown('<div class="parameter-column reaction-conditions">', unsafe_allow_html=True)
-st.write("**pH:**", df['pH'].values[0])
-st.write("**Time (min):**", df['Time'].values[0])
-st.write("**C_MgO (g/L):**", df['C_MgO'].values[0])
-st.write("**C_F (mg/L):**", df['C_F'].values[0])
-st.markdown('</div>', unsafe_allow_html=True)
-
-st.markdown('<div class="parameter-column coexisting-ions">', unsafe_allow_html=True)
-st.write("**NO3- (mg/L):**", df['NO3-'].values[0])
-st.write("**Br- (mg/L):**", df['Br-'].values[0])
-st.write("**Cl- (mg/L):**", df['Cl-'].values[0])
-st.write("**(SO4)2- (mg/L):**", df['(SO4)2-'].values[0])
-st.write("**HCO3- (mg/L):**", df['HCO3-'].values[0])
-st.write("**(CO3)2- (mg/L):**", df['(CO3)2-'].values[0])
-st.write("**(PO4)3- (mg/L):**", df['(PO4)3-'].values[0])
-st.markdown('</div>', unsafe_allow_html=True)
+# Using columns to display input parameters
+col1, col2 = st.columns(2)
+with col1:
+    st.write("**BET (m2/g):**", df['BET'].values[0])
+    st.write("**D_average (nm):**", df['D_average'].values[0])
+    st.write("**Pore Volume (cm3/g):**", df['Pore_volume'].values[0])
+    st.write("**Qm (mg/g):**", df['Qm'].values[0])
+    st.write("**pH:**", df['pH'].values[0])
+    st.write("**Time (min):**", df['Time'].values[0])
+    st.write("**C_MgO (g/L):**", df['C_MgO'].values[0])
+    st.write("**C_F (mg/L):**", df['C_F'].values[0])
+with col2:
+    st.write("**NO3- (mg/L):**", df['NO3-'].values[0])
+    st.write("**Br- (mg/L):**", df['Br-'].values[0])
+    st.write("**Cl- (mg/L):**", df['Cl-'].values[0])
+    st.write("**(SO4)2- (mg/L):**", df['(SO4)2-'].values[0])
+    st.write("**HCO3- (mg/L):**", df['HCO3-'].values[0])
+    st.write("**(CO3)2- (mg/L):**", df['(CO3)2-'].values[0])
+    st.write("**(PO4)3- (mg/L):**", df['(PO4)3-'].values[0])
 
 # Load model and make prediction
 model = load_model()
